@@ -1,0 +1,349 @@
+/* ---------------------------------------------------------
+   FONTS & ROOT VARIABLES (no causan conflicto)
+--------------------------------------------------------- */
+
+@font-face {
+  font-family: 'Bellerose';
+  src: url('/assets/fonts/Bellerose.ttf') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --primary: #350410;
+  --secondary: #5f0b0b;
+  --background: #f9f9f9;
+  --text: #333333;
+  --accent: #ffd166;
+  --highlight: #4ecdc4;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --font-primary: 'Bellerose', sans-serif;
+  --transition: all 0.3s ease;
+}
+
+/* ---------------------------------------------------------
+   SCOPE TOTAL (NADA global) → TODO dentro de .reservas-wrapper
+--------------------------------------------------------- */
+
+.reservas-wrapper {
+  font-family: var(--font-primary);
+  background-color: var(--background);
+  color: var(--text);
+  line-height: 1.6;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.reservas-wrapper .reservas-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  opacity: 1;
+}
+
+/* ---------------------------------------------------------
+   TITULOS Y TEXTOS
+--------------------------------------------------------- */
+
+.reservas-wrapper .section-title {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  opacity: 1;
+}
+
+.reservas-wrapper .section-title::after {
+  content: '';
+  position: absolute;
+  width: 60px;
+  height: 3px;
+  background-color: var(--accent);
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.reservas-wrapper .section-text {
+  font-size: 1.1rem;
+  max-width: 800px;
+  margin: 0 auto 2rem;
+  line-height: 1.8;
+}
+
+/* ---------------------------------------------------------
+   ANIMACIONES
+--------------------------------------------------------- */
+
+@keyframes gradientBackground {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+
+/* ---------------------------------------------------------
+   SHOWS SECTION
+--------------------------------------------------------- */
+
+.reservas-wrapper .shows-section {
+  padding: 6rem 1rem;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  background-size: 200% 200%;
+  animation: gradientBackground 15s ease infinite;
+  color: white;
+  text-align: center;
+  opacity: 1;
+}
+
+.reservas-wrapper .show-highlights {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.reservas-wrapper .highlight-card {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 2.5rem 2rem;
+  border-radius: 12px;
+  text-align: center;
+  flex: 1 1 250px;
+  max-width: 300px;
+  transition: var(--transition);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: fadeIn 0.8s ease-out forwards;
+  opacity: 0;
+}
+
+.reservas-wrapper .highlight-card:nth-child(1) { animation-delay: 0.1s; }
+.reservas-wrapper .highlight-card:nth-child(2) { animation-delay: 0.3s; }
+.reservas-wrapper .highlight-card:nth-child(3) { animation-delay: 0.5s; }
+.reservas-wrapper .highlight-card:nth-child(4) { animation-delay: 0.7s; }
+
+.reservas-wrapper .highlight-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+.reservas-wrapper .highlight-card i {
+  font-size: 3.5rem;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+  animation: float 3s ease-in-out infinite;
+}
+
+.reservas-wrapper .highlight-card h3 {
+  font-size: 1.7rem;
+  margin-bottom: 1rem;
+}
+
+/* ---------------------------------------------------------
+   FORMULARIO DE RESERVA
+--------------------------------------------------------- */
+
+.reservas-wrapper .reserva-section {
+  padding: 6rem 1rem;
+  background-color: var(--background);
+  text-align: center;
+  position: relative;
+  opacity: 1;
+}
+
+.reservas-wrapper .reserva-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(to right, var(--primary), var(--accent), var(--primary));
+}
+
+.reservas-wrapper .reserva-form {
+  max-width: 600px;
+  margin: 2rem auto 0;
+  padding: 3rem;
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: var(--transition);
+}
+
+.reservas-wrapper .form-group {
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.reservas-wrapper .form-group label {
+  display: block;
+  margin-bottom: 0.8rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.reservas-wrapper .form-group input,
+.reservas-wrapper .form-group textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: #f8f8f8;
+  transition: var(--transition);
+}
+
+.reservas-wrapper .form-group input:focus,
+.reservas-wrapper .form-group textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 10px rgba(255, 209, 102, 0.3);
+  background-color: white;
+}
+
+/* ---------------------------------------------------------
+   BOTONES DE TIPO DE ESPECTÁCULO
+--------------------------------------------------------- */
+
+.reservas-wrapper .button-select {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.reservas-wrapper .select-button {
+  padding: 10px 15px;
+  border: 2px solid var(--primary);
+  background-color: transparent;
+  color: var(--primary);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.reservas-wrapper .select-button.active,
+.reservas-wrapper .select-button:hover {
+  background-color: var(--primary);
+  color: white;
+}
+
+/* ---------------------------------------------------------
+   SUBMIT BUTTON
+--------------------------------------------------------- */
+
+.reservas-wrapper .submit-button {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  margin-top: 1rem;
+}
+
+.reservas-wrapper .submit-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 7px 20px rgba(53, 4, 16, 0.4);
+}
+
+/* ---------------------------------------------------------
+   MENSAJE DE ÉXITO / ERROR
+--------------------------------------------------------- */
+
+.reservas-wrapper #message {
+  margin-top: 2rem;
+  padding: 15px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 1.1rem;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reservas-wrapper #message.success {
+  background-color: rgba(40, 167, 69, 0.1);
+  color: #28a745;
+  border: 1px solid #28a745;
+}
+
+.reservas-wrapper #message.error {
+  background-color: rgba(220, 53, 69, 0.1);
+  color: #dc3545;
+  border: 1px solid #dc3545;
+}
+
+/* ---------------------------------------------------------
+   CONTACT SECTION
+--------------------------------------------------------- */
+
+.reservas-wrapper .contact {
+  padding: 6rem 1rem;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  background-size: 200% 200%;
+  animation: gradientBackground 15s ease infinite;
+  color: white;
+  text-align: center;
+  opacity: 1;
+}
+
+.reservas-wrapper .contact-button {
+  display: inline-flex;
+  align-items: center;
+  padding: 16px 32px;
+  background-color: var(--accent);
+  color: var(--primary);
+  border-radius: 50px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.reservas-wrapper .contact-button:hover {
+  background-color: var(--highlight);
+  transform: translateY(-5px);
+}
+
+/* ---------------------------------------------------------
+   RESPONSIVE
+--------------------------------------------------------- */
+
+@media (max-width: 768px) {
+  .reservas-wrapper .section-title {
+    font-size: 2.3rem;
+  }
+
+  .reservas-wrapper .reserva-form {
+    padding: 2rem;
+  }
+
+  .reservas-wrapper .select-button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .reservas-wrapper .section-title {
+    font-size: 2rem;
+  }
+
+  .reservas-wrapper .reserva-form {
+    padding: 1.5rem;
+  }
+}
