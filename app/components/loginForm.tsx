@@ -70,6 +70,10 @@ export default function LoginForm() {
       <button type="submit" className="btn" disabled={loading}>
         {loading ? "Cargando..." : "Iniciar Sesión"}
       </button>
+
+      <div className="forgot-password-link">
+        <a href="/forgot-password">¿Olvidaste tu contraseña?</a>
+      </div>
     </form>
   );
 }

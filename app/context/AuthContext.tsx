@@ -9,6 +9,7 @@ interface AuthContextProps {
   login: (email: string, password: string) => Promise<any>;
   register: (data: RegisterPayload) => Promise<any>;
   logout: () => Promise<void>;
+  updatePassword: (newPassword: string) => Promise<any>; // ← agregado
 }
 
 interface RegisterPayload {
@@ -61,36 +62,45 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   // REGISTER
- const register = async ({
-  email,
-  password,
-  first_name,
-  last_name,
-  username,
-  phone,
-}: RegisterPayload) => {
-
-  console.log({ email, password, first_name, last_name, username, phone });
-
-  const { data, error } = await supabase.auth.signUp({
+  const register = async ({
     email,
     password,
-    options: {
-      data: {
-        first_name,
-        last_name,
-        phone: phone || undefined,
+    first_name,
+    last_name,
+    username,
+    phone,
+  }: RegisterPayload) => {
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: {
+          first_name,
+          last_name,
+          phone: phone || undefined,
+        },
       },
-    },
-  });
+    });
 
-  if (error) {
-    return { success: false, message: error.message };
-  }
+    if (error) {
+      return { success: false, message: error.message };
+    }
 
-  return { success: true, user: data.user };
-};
+    return { success: true, user: data.user };
+  };
 
+  // UPDATE PASSWORD
+  const updatePassword = async (newPassword: string) => {
+    const { data, error } = await supabase.auth.updateUser({
+      password: newPassword,
+    });
+
+    if (error) {
+      return { success: false, message: error.message };
+    }
+
+    return { success: true, user: data.user };
+  };
 
   // LOGOUT
   const logout = async () => {
@@ -98,7 +108,16 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, register, logout, loading }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        login,
+        register,
+        logout,
+        loading,
+        updatePassword, // ← agregado al contexto
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

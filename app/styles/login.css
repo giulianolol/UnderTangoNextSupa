@@ -266,6 +266,37 @@ input:focus {
     100% { transform: translateX(0); }
 }
 
+.forgot-password-link {
+  margin-top: 14px;
+  text-align: center;
+}
+
+.forgot-password-link a {
+  color: #bfbfbf;
+  font-size: 14px;
+  text-decoration: none;
+  opacity: 0.85;
+  transition: 0.25s ease;
+}
+
+.forgot-password-link a:hover {
+  color: #fff;
+  opacity: 1;
+  text-shadow: 0 0 6px rgba(255,255,255,0.4);
+}
+
+
+.success-box {
+  margin: 14px 0;
+  padding: 12px 16px;
+  background: rgba(0,255,0,0.06);
+  border-left: 4px solid rgba(0,255,100,0.7);
+  color: #d6ffd6;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+
 /* responsive */
 @media (max-width: 540px) {
     .container {
